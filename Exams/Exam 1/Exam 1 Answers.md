@@ -164,3 +164,124 @@ So whatever data types you put call the method with determines what will happen.
   D
 </pre>
 ## Question 11
+```java
+   class A1 { // doesn't use the keyword abstract when declaring the class
+      abstract void unfinished();
+   }
+
+   abstract class A2 {
+      abstract void unfinished(){ } // abstract methods can't have a body {}
+   }
+
+   abstract class A4 {
+      private abstract void unfinished(); // abstact method can't be private
+   }
+```
+This is the only one that is declared properly
+```java
+abstract class A3 {
+    abstract void unfinished();
+}
+```
+
+## Question 12
+```java
+A a = new B(1,2);       /*1 */
+B b = new C(3,4,5);     /*2 */
+C c = new C(6,7,8);     /*3 */
+// C d = new A(6,7,8);  /*4 */
+int a1 = a.getA();      /*5 */
+// a.setB(10);          /*6 */
+int a2 = b.getA();      /*7 */
+// int b2 = b.getb();   /*8 */
+// int c2 = b.getC();   /*9 */
+int a3 = c.getA();      /*10*/
+c.setB(10);             /*11*/
+// ((C)a).setB(11);     /*12*/
+((C)b).setB(12);        /*13*/
+int b3 = ((C)b).getC(); /*14*/
+```
+
+Line 4 doesn't compile because a 'C' reference type cannot refer to an 'A' object because it is above it in the tree
+
+Line 6 doesn't compile because a is an 'A' reference type refering to a 'B' object, so because it is an 'A' reference type, when it calls the method "setB()" it looks for the method in the A class and cannot find it. 
+
+Line 8 the method call has a typo, "setb()" should be uppercase B --> "setB()"
+
+Line 9 doesn't compile because a is an 'B' reference type refering to a 'C' object, so because it is a 'B' reference type, when it calls the method "getC()" it looks for the method in the B class and cannot find it. 
+
+Line 12 doesn't work because it tries to cast a 'B' refence type to a 'C' reference type which is below it in the tree
+
+## Question 13
+```java
+A a1 = new A();
+A a2 = new C();
+D d1 = new D();
+   
+A a3 = new B();      /*1*/  
+// B b1 = new A();   /*2*/  
+// B b2 = (B) a1;    /*3*/  
+B b3 = (B) a2;       /*4*/  
+// B b4 = (B) d1;    /*5*/  
+```
+Line 2 doesn't compile because a 'B' reference type cannot refer to an 'A' object because it is above it in the tree
+
+Line 3 will have a runtime error because it tries to cast an 'A' reference type refering to an 'A' object, to a 'B' reference type and you can't refer to an object above you in the tree. Because of the beetle.
+
+Line 5 bad casting smd
+
+## Question 14
+### a)
+```java
+C c = new D();
+c.????(...);
+```
+we can call methods from the C, A, G, and Object class definitions
+### b) 
+```java
+G g = new ?();
+```
+You can replace the '?' with C, D, or E because they all implement or inherit the G interface. 
+
+### c) 
+```java
+? x = new E();
+```
+you can replace the '?' with a E, C, A, G, or Object because those are all above E in the tree. 
+
+### d)
+Can only cas to A to run, think through the trr, for it to compile all possibilities are A, G, D, E, and Object
+
+## Question 15 
+### a) 
+super and this used as method names calls the constructor in that class. so "super(x, y)" would call the constructor in the super class, and "this(x, y)" would call the constructor in this class.
+
+### b) 
+using super and this as calling objects will call the method in that class. So say that you override a method in and class that extends another class. But you want to call the method in the super class, you would use the super keyword to call he method in the super class, not the method in the 
+
+## Question 16 
+b1 --> false
+b2 --> false
+b3 --> false
+b4 --> false
+b5 --> true
+b6 --> true
+
+## Question 17 
+```java
+public boolean equals(A a)
+{
+    return (this.n == a.n && this.m == a.m);
+}
+```
+
+## Question 18
+```java
+@Override
+public String toString()
+{
+    String result = "TwoPairs: <" + x1 + ", " + y1 + ">";
+    result += " and <" + x2 + ", " + y2 + ">";
+    return result;
+}
+```
